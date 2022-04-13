@@ -12,20 +12,15 @@ endif ()
 include(FetchContent)
 
 if (DEFINED LOCAL_SOURCE_PACKAGE_DIR)
-    FetchContent_Declare(xyz
-        URL "file://${LOCAL_SOURCE_PACKAGE_DIR}/Xyz-0.1.3.1.tar.gz")
     FetchContent_Declare(tungsten
-        URL "file://${LOCAL_SOURCE_PACKAGE_DIR}/Tungsten-0.1.3.4.tar.gz")
+        URL "file://${LOCAL_SOURCE_PACKAGE_DIR}/Tungsten-0.2.6.tar.gz")
 else ()
-    FetchContent_Declare(xyz
-        GIT_REPOSITORY "https://github.com/jebreimo/Xyz.git"
-        GIT_TAG v0.1.3)
     FetchContent_Declare(tungsten
         GIT_REPOSITORY "https://github.com/jebreimo/Tungsten.git"
-        GIT_TAG v0.1.3)
+        GIT_TAG v0.2.6)
 endif ()
 
-FetchContent_MakeAvailable(tungsten xyz)
+FetchContent_MakeAvailable(tungsten)
 
 list(APPEND CMAKE_MODULE_PATH ${tungsten_SOURCE_DIR}/tools/cmake)
 
@@ -35,7 +30,7 @@ add_executable(CircleBar
     src/CircleBar/CircleBar.cpp
     src/CircleBar/CircleBarShaderProgram.cpp
     src/CircleBar/CircleBarShaderProgram.hpp
-    src/CircleBar/VertexArray.hpp)
+    )
 
 target_link_libraries(CircleBar
     PRIVATE

@@ -6,8 +6,8 @@
 // License text is included with the source distribution.
 //****************************************************************************
 #pragma once
-#include "Tungsten/Tungsten.hpp"
-#include "Tungsten/Uniform.hpp"
+#include <Tungsten/Tungsten.hpp>
+#include <Tungsten/Uniform.hpp>
 
 class CircleBarShaderProgram
 {
@@ -16,6 +16,6 @@ public:
 
     Tungsten::ProgramHandle program;
 
-    Tungsten::Uniform<Xyz::Matrix3f> view_matrix;
+    Tungsten::Uniform<Xyz::Matrix3F> view_matrix;
     GLuint position_attribute;
 };
