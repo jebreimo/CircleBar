@@ -1,6 +1,5 @@
 #include <iostream>
 
-#include <Xyz/Generators.hpp>
 #include <Tungsten/ArrayBufferBuilder.hpp>
 #include <Tungsten/Tungsten.hpp>
 #include "CircleBarShaderProgram.hpp"
@@ -15,16 +14,16 @@ void add_circle_strip(Tungsten::ArrayBuffer<Xyz::Vector2F>& array,
     Tungsten::ArrayBufferBuilder builder(array);
     builder.reserve_vertexes(num_points * 2 + 2);
     builder.reserve_indexes(num_points * 2 + 2);
-    unsigned i = 0;
-    auto generator = Xyz::CircleGenerator<float>(num_points)
-        .repeat_first_point(true).start_angle(PI / 2);
-    for (const auto p : generator)
+    auto start_angle = PI / 2.0f;
+    auto delta_angle = 2 * PI / float(num_points);
+    for (uint32_t i = 0; i <= num_points; ++i)
     {
+        auto angle = start_angle + delta_angle * float(i);
+        auto p = Xyz::make_vector2(cos(angle), sin(angle));
         builder.add_vertex(center + p * inner_radius);
         builder.add_vertex(center + p * outer_radius);
         builder.add_index(i * 2);
         builder.add_index(i * 2 + 1);
-        ++i;
     }
 }
 
